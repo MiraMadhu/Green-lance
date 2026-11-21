@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: greenlance
+    runtime: docker
+    plan: starter            # a persistent disk requires a paid instance
+    healthCheckPath: /healthz
+    disk:
+      name: greenlance-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_PATH
+        value: /data/app.db
+      - key: JWT_SECRET
+        generateValue: true
+      - key: BASE_URL
+        sync: false          # e.g. https://greenlance.onrender.com  (or your custom domain)
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
